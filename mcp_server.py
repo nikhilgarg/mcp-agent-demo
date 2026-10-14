@@ -56,7 +56,6 @@ def summarize_text(text: str) -> str:
     if not api_key:
         raise gr.Error("Set OPENAI_API_KEY in the project's .env file and restart the server.")
     model = os.environ.get("OPENAI_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
-    print(api_key, model)
     try:
         with OpenAI(api_key=api_key) as client:
             response = client.chat.completions.create(
@@ -209,4 +208,4 @@ demo = gr.TabbedInterface([sentiment_demo, summarize_demo, translate_demo, stock
 # Launch with MCP
 if __name__ == "__main__":
     # Launch Gradio with MCP support on default port (7860 or next free one)
-    demo.launch(mcp_server=True, share=True) 
+    demo.launch(mcp_server=True, share=False) 
